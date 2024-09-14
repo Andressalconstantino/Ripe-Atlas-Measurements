@@ -1,6 +1,7 @@
 import json
 import os
 
+#funções
 def getProbeCountry(probeId):
     pass
     #pegar o pais do dicionario a partir do id?
@@ -17,24 +18,20 @@ def getLatency(probeInfo):
     
     return latencias
 
+#código
 file_path = 'jsonFiles/example-probe.json'
-if os.path.isfile(file_path):
-    print("Arquivo encontrado")
-    with open('jsonFiles/example-probe.json', 'r') as jsonFile:
-        probeInfo = json.load(jsonFile)
+with open('jsonFiles/example-probe.json', 'r') as jsonFile:
+    probeInfo = json.load(jsonFile)
 
-    if (probeInfo["destination_ip_responded"]):
-        probeJson = {
-            'probeId': probeInfo['prb_id'],
-            'pais' : getProbeCountry(probeInfo['prb_id']),
-            'continente' : getProbeContinent(probeInfo['prb_id']),
-            'latencia' : getLatency(probeInfo),
-            'quantidadeSaltos' : len(probeInfo['result'])
-        }
-        print(probeJson)
-    else:
-        print(f"Probe {probeInfo['prb_id']} não chegou ao destino")
-
-
+if (probeInfo["destination_ip_responded"]): #verifica se a probe chegou ao destino
+    probeJson = { #informações de cada probe para gerar os gráficos?
+        'probeId': probeInfo['prb_id'],
+        'destino' : probeInfo['dst_name'],
+        'pais' : getProbeCountry(probeInfo['prb_id']),
+        'continente' : getProbeContinent(probeInfo['prb_id']),
+        'latencia' : getLatency(probeInfo),
+        'quantidadeSaltos' : len(probeInfo['result'])
+    }
+    print(probeJson)
 else:
-    print("Arquivo não encontrado")
+    print(f"Probe {probeInfo['prb_id']} não chegou ao destino")
