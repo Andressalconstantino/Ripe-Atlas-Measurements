@@ -12,8 +12,8 @@ def getProbeContinent(probreId):
 def getLatency(probeInfo):
     latencias = []
     for hop in probeInfo['result']:
-        latencias_hop = [item['rtt'] for item in hop['result'] if 'rtt' in item]
-        latencias.append(latencias_hop)
+        latenciasHop = [item['rtt'] for item in hop['result'] if 'rtt' in item]
+        latencias.append(latenciasHop)
     
     return latencias
 
