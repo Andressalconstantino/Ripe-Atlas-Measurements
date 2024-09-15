@@ -1,1 +1,0 @@
-#dicionario com probeid e continente?

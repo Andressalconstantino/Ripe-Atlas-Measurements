@@ -1,13 +1,12 @@
 import json
+from probes import probes
 
-#funções
 def getProbeCountry(probeId):
-    pass
-    #pegar o pais do dicionario a partir do id?
+    return probes.get(probeId, {}).get("país", "ID não encontrado")
 
-def getProbeContinent(probreId):
-    pass
-    #pegar o continente do dicionario a partir do id?
+def getProbeContinent(probeId):
+    return probes.get(probeId, {}).get("continente", "ID não encontrado")
+
 
 def getLatency(probeInfo):
     latencias = []
@@ -34,3 +33,8 @@ if (probeInfo["destination_ip_responded"]): #verifica se a probe chegou ao desti
     print(probeJson)
 else:
     print(f"Probe {probeInfo['prb_id']} não chegou ao destino")
+
+print(getProbeCountry(7126))  # Saída: Thailand
+print(getProbeContinent(7126))  # Saída: Ásia
+print(getProbeCountry(16012))  # Saída: Reino Unido
+print(getProbeContinent(16012))  # Saída: Europa
