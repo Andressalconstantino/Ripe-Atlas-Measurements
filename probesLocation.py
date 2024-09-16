@@ -1,4 +1,3 @@
-#dicionario com probeid e continente?# Criação do dicionário
 probesLocation = {
     7126: {"país": "Tailândia", "continente": "Ásia"},
     16012: {"país": "Reino Unido", "continente": "Europa"},
