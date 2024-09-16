@@ -1,10 +1,10 @@
 #dicionario com probeid e continente?# Criação do dicionário
 probesLocation = {
-    7126: {"país": "Thailand", "continente": "Ásia"},
+    7126: {"país": "Tailândia", "continente": "Ásia"},
     16012: {"país": "Reino Unido", "continente": "Europa"},
     54441: {"país": "Reino Unido", "continente": "Europa"},
     55023: {"país": "Reino Unido", "continente": "Europa"},
-    1006226: {"país": "Thailand", "continente": "Ásia"},
+    1006226: {"país": "Tailândia", "continente": "Ásia"},
     11813: {"país": "Reino Unido", "continente": "Europa"},
     1006068: {"país": "Estados Unidos", "continente": "América do Norte"},
     62657: {"país": "Canadá", "continente": "América do Norte"},
@@ -23,7 +23,7 @@ probesLocation = {
     55630: {"país": "Estados Unidos", "continente": "América do Norte"},
     60345: {"país": "Países Baixos", "continente": "Europa"},
     1001877: {"país": "Japão", "continente": "Ásia"},
-    1003641: {"país": "Thailand", "continente": "Ásia"},
+    1003641: {"país": "Tailândia", "continente": "Ásia"},
     1004979: {"país": "México", "continente": "América do Norte"},
     1005021: {"país": "México", "continente": "América do Norte"},
     1006146: {"país": "Índia", "continente": "Ásia"},
