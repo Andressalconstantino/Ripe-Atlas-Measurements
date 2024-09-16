@@ -1,11 +1,12 @@
 import json
-from probes import probes
+from datetime import datetime
+from probesLocation import probesLocation
 
-def getProbeCountry(probeId):
-    return probes.get(probeId, {}).get("país", "ID não encontrado")
+def getProbeCountry(probeId): #pegar país
+    return probesLocation.get(probeId, {}).get('país', f'ID {probeId} não encontrado')
 
-def getProbeContinent(probeId):
-    return probes.get(probeId, {}).get("continente", "ID não encontrado")
+def getProbeContinent(probeId): #pegar continente
+    return probesLocation.get(probeId, {}).get('continente', f'ID {probeId} não encontrado')
 
 
 def getLatency(probeInfo):
@@ -16,25 +17,34 @@ def getLatency(probeInfo):
     
     return latencias
 
+#pegar dados relevantes das medições:
+def getRelevantInfo(fileName):
+    with open(fileName, 'r') as jsonFile:
+        resultInfo = json.load(jsonFile)
+    for probeInfo in resultInfo['info']:
+        if (probeInfo["destination_ip_responded"]): #verifica se a probe chegou ao destino
+            probeJson = { #informações de cada probe para gerar os gráficos?
+                'probeId': probeInfo['prb_id'],
+                'destino' : probeInfo['dst_name'],
+                'pais' : getProbeCountry(probeInfo['prb_id']),
+                'continente' : getProbeContinent(probeInfo['prb_id']),
+                'latencia' : getLatency(probeInfo), #uma lista com a lista de latencias capturadas por salto (hop)
+                'quantidadeSaltos' : len(probeInfo['result']),
+                'data' : datetime.fromtimestamp(probeInfo['stored_timestamp']).strftime('%Y-%m-%d %H:%M:%S')
+            }
+            probeRelevantInfo.append(probeJson)
+
 #código
-file_path = 'jsonFiles/example-probe.json'
-with open('jsonFiles/example-probe.json', 'r') as jsonFile:
-    probeInfo = json.load(jsonFile)
+probeRelevantInfo = [] #lista pra guardar todos os dados
+reuters = 'jsonFiles/Reuters.json'
+googleNews = 'jsonFiles/GoogleNews.json'
+folhaSP = 'jsonFiles/FolhaSP.json'
 
-if (probeInfo["destination_ip_responded"]): #verifica se a probe chegou ao destino
-    probeJson = { #informações de cada probe para gerar os gráficos?
-        'probeId': probeInfo['prb_id'],
-        'destino' : probeInfo['dst_name'],
-        'pais' : getProbeCountry(probeInfo['prb_id']),
-        'continente' : getProbeContinent(probeInfo['prb_id']),
-        'latencia' : getLatency(probeInfo),
-        'quantidadeSaltos' : len(probeInfo['result'])
-    }
-    print(probeJson)
-else:
-    print(f"Probe {probeInfo['prb_id']} não chegou ao destino")
+getRelevantInfo(reuters)
+getRelevantInfo(googleNews)
+getRelevantInfo(folhaSP)
 
-print(getProbeCountry(7126))  # Saída: Thailand
-print(getProbeContinent(7126))  # Saída: Ásia
-print(getProbeCountry(16012))  # Saída: Reino Unido
-print(getProbeContinent(16012))  # Saída: Europa
+#criar gráficos
+#percorrer a lista de probeRelevantInfo para usar os dados nos gráficos?
+print(probeRelevantInfo)
+print(len(probeRelevantInfo))

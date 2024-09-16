@@ -1,5 +1,5 @@
 #dicionario com probeid e continente?# Criação do dicionário
-probes = {
+probesLocation = {
     7126: {"país": "Thailand", "continente": "Ásia"},
     16012: {"país": "Reino Unido", "continente": "Europa"},
     54441: {"país": "Reino Unido", "continente": "Europa"},
@@ -29,4 +29,5 @@ probes = {
     1006146: {"país": "Índia", "continente": "Ásia"},
     1006361: {"país": "França", "continente": "Europa"},
     1007949: {"país": "Países Baixos", "continente": "Europa"},
+    1004383: {"país": "Japão", "continente": "Ásia"}
 }
