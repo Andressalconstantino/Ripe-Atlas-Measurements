@@ -60,11 +60,11 @@ getRelevantInfo(folhaSP)
 #Transformando os dados agrupados por probeId em um DataFrame para facilitar a manipulação
 def convert_to_dataframe(probeGroupedInfo):
     data = []
-    for probeId, measurements in probeGroupedInfo.items():
+    for probeId, measurements in probeGroupedInfo.items(): #itera sobre cada uma das medições de uma probe
         for measurement in measurements:
             for hop_latencies in measurement['latencia']:
                 if len(hop_latencies) > 0:
-                    latencia_media = sum(hop_latencies) / len(hop_latencies)
+                    latencia_media = sum(hop_latencies) / len(hop_latencies) #Faz o cálculo da latência média de todos os hops da probe
                 else:
                     latencia_media = None
 
@@ -79,17 +79,17 @@ def convert_to_dataframe(probeGroupedInfo):
     return pd.DataFrame(data)
 
 
-df = convert_to_dataframe(probeGroupedInfo)
+dataFrame = convert_to_dataframe(probeGroupedInfo)
 
 # Convertendo a coluna 'data' para datetime
-df['data'] = pd.to_datetime(df['data'])
+dataFrame['data'] = pd.to_datetime(dataFrame['data'])
 
 
 #Latência média por destino
-def plot_aggregated_latency_by_destination(df):
-    df_grouped = df.groupby('destino')['latencia'].mean().reset_index()
+def plot_aggregated_latency_by_destination(dataFrame):
+    dataFrame_grouped = dataFrame.groupby('destino')['latencia'].mean().reset_index()
     plt.figure(figsize=(10, 6))
-    plt.bar(df_grouped['destino'], df_grouped['latencia'])
+    plt.bar(dataFrame_grouped['destino'], dataFrame_grouped['latencia'])
     
     plt.title('Latência Média para Cada Destino')
     plt.xlabel('Destino')
@@ -99,10 +99,10 @@ def plot_aggregated_latency_by_destination(df):
     plt.show()
 
 #Latência média por continente
-def plot_latency_by_continent(df):
-    df_grouped = df.groupby('continente')['latencia'].mean().reset_index()
+def plot_latency_by_continent(dataFrame):
+    dataFrame_grouped = dataFrame.groupby('continente')['latencia'].mean().reset_index()
     plt.figure(figsize=(10, 6))
-    plt.bar(df_grouped['continente'], df_grouped['latencia'])
+    plt.bar(dataFrame_grouped['continente'], dataFrame_grouped['latencia'])
     
     plt.title('Latência Média por Continente')
     plt.xlabel('Continente')
@@ -111,10 +111,10 @@ def plot_latency_by_continent(df):
     plt.show()
 
 #Latência média por país
-def plot_latency_by_country(df):
-    df_grouped = df.groupby('pais')['latencia'].mean().reset_index()
+def plot_latency_by_country(dataFrame):
+    dataFrame_grouped = dataFrame.groupby('pais')['latencia'].mean().reset_index()
     plt.figure(figsize=(10, 6))
-    plt.bar(df_grouped['pais'], df_grouped['latencia'])
+    plt.bar(dataFrame_grouped['pais'], dataFrame_grouped['latencia'])
     
     plt.title('Latência Média por País')
     plt.xlabel('País')
@@ -124,6 +124,6 @@ def plot_latency_by_country(df):
     plt.show()
 
 # Chamar as funções para plotar os gráficos
-plot_aggregated_latency_by_destination(df)
-plot_latency_by_continent(df)
-plot_latency_by_country(df)
+plot_aggregated_latency_by_destination(dataFrame)
+plot_latency_by_continent(dataFrame)
+plot_latency_by_country(dataFrame)
