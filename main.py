@@ -347,7 +347,7 @@ def main():
             plotLatencyOverTimeByCountry(dataframe_hourly_combined_country, output_dir)
             plotHopsOverTimeByCountry(dataframe_hourly_combined_country, output_dir)
             plotLatencyVsHopsByCountry(dataframe_country, output_dir)
-    #Gera gráficos comparativos de todos os países para o destino atual
+        #Gera gráficos comparativos de todos os países para o destino atual
         output_dir = f'imagensPaises/{destination}'
         os.makedirs(output_dir, exist_ok=True)
         plotLatencyOverTimeByCountry(dataframe_destination, output_dir)
