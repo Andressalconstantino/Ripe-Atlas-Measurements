@@ -1,3 +1,5 @@
+#Código desenvolvido por Andressa Constantino, Karoline Terra e Vitor Trevisol
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
