@@ -295,8 +295,10 @@ def main():
 
     #Gráficos por continente e por destino
     for destination in dataframe_combined['destination'].unique():
+
         #Filtra os dados para o destino atual
         dataframe_destination = dataframe_combined[dataframe_combined['destination'] == destination]
+        
         
         for continent in dataframe_destination['continent'].unique():
             #Filtra os dados para o continente atual
@@ -315,7 +317,14 @@ def main():
             plotLatencyOverTimeByContinent(dataframe_hourly_combined_continent, output_dir)
             plotHopsOverTimeByContinent(dataframe_hourly_combined_continent, output_dir)
             plotLatencyVsHopsByContinent(dataframe_continent, output_dir)
-
+        #Gera gráficos comparativos de todos os continentes para o destino atual
+        output_dir = f'imagensContinentes/{destination}'
+        os.makedirs(output_dir, exist_ok=True)
+        plotLatencyOverTimeByContinent(dataframe_destination, output_dir)
+        plotHopsOverTimeByContinent(dataframe_destination, output_dir)
+        plotLatencyVsHopsByContinent(dataframe_destination, output_dir)
+        
+    
     #Gráficos por país e por destino
     for destination in dataframe_combined['destination'].unique():
         #Filtra os dados para o destino atual
@@ -338,7 +347,12 @@ def main():
             plotLatencyOverTimeByCountry(dataframe_hourly_combined_country, output_dir)
             plotHopsOverTimeByCountry(dataframe_hourly_combined_country, output_dir)
             plotLatencyVsHopsByCountry(dataframe_country, output_dir)
-
+    #Gera gráficos comparativos de todos os países para o destino atual
+        output_dir = f'imagensPaises/{destination}'
+        os.makedirs(output_dir, exist_ok=True)
+        plotLatencyOverTimeByCountry(dataframe_destination, output_dir)
+        plotHopsOverTimeByCountry(dataframe_destination, output_dir)
+        plotLatencyVsHopsByCountry(dataframe_destination, output_dir)
 
     #Agrupa os dados por destino e hora
     dataframe_hourly_combined_destination = dataframe_combined.groupby(['destination', pd.Grouper(key='timestamp', freq='H')]).agg({
