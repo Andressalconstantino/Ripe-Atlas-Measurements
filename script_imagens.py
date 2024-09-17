@@ -26,7 +26,7 @@ pais = []
 cod = []
 probeGroupedInfo = {}
 
-with open('jsonFiles/Reuters.json', 'r') as jsonFile:
+with open('jsonFiles/GoogleNews.json', 'r') as jsonFile:
     resultInfo = json.load(jsonFile)
 for probeInfo in resultInfo['info']:
     if probeInfo["destination_ip_responded"]:  # Verifica se a probe chegou ao destino
@@ -51,11 +51,11 @@ for x in probeGroupedInfo:
         pais.append(probeGroupedInfo[x][0])
 paises = list(set(pais))
 
-output_dir = 'imagens/Reuters'
+output_dir = 'imagens/GoogleNews'
 
 for pais in paises:
     probeGroupedInfo = {}
-    with open('jsonFiles/Reuters.json', 'r') as jsonFile:
+    with open('jsonFiles/GoogleNews.json', 'r') as jsonFile:
         resultInfo = json.load(jsonFile)
     for probeInfo in resultInfo['info']:
         if probeInfo["destination_ip_responded"] and getProbeCountry(probeInfo['prb_id']) == pais: 
@@ -124,7 +124,7 @@ for pais in paises:
         import matplotlib.pyplot as plt
         import seaborn as sns
 
-        data = probeGroupedInfo[ids[2]]  # de 0 a 3 qual probe por país você quer
+        data = probeGroupedInfo[id]  # de 0 a 3 qual probe por país você quer
 
         rows = []
 

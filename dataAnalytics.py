@@ -90,7 +90,6 @@ def plot_aggregated_latency_by_destination(dataFrame):
     dataFrame_grouped = dataFrame.groupby('destino')['latencia'].mean().reset_index()
     plt.figure(figsize=(10, 6))
     plt.bar(dataFrame_grouped['destino'], dataFrame_grouped['latencia'])
-    
     plt.title('Latência Média para Cada Destino')
     plt.xlabel('Destino')
     plt.ylabel('Latência Média (ms)')
@@ -103,7 +102,6 @@ def plot_latency_by_continent(dataFrame):
     dataFrame_grouped = dataFrame.groupby('continente')['latencia'].mean().reset_index()
     plt.figure(figsize=(10, 6))
     plt.bar(dataFrame_grouped['continente'], dataFrame_grouped['latencia'])
-    
     plt.title('Latência Média por Continente')
     plt.xlabel('Continente')
     plt.ylabel('Latência Média (ms)')
@@ -115,7 +113,6 @@ def plot_latency_by_country(dataFrame):
     dataFrame_grouped = dataFrame.groupby('pais')['latencia'].mean().reset_index()
     plt.figure(figsize=(10, 6))
     plt.bar(dataFrame_grouped['pais'], dataFrame_grouped['latencia'])
-    
     plt.title('Latência Média por País')
     plt.xlabel('País')
     plt.ylabel('Latência Média (ms)')
